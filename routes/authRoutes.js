@@ -1,4 +1,7 @@
 const express = require("express");
+const { protect } =  require("../middleware/authMiddleware");
+
+const{registerUser,loginUser,getUserProfile,updateUserProfile } = require("../controllers/authControllers")
 
 const router = express.Router();
 
@@ -16,4 +19,4 @@ router.get("/profile", protect, getUserProfile);
 //Update User Profile
 router.put("/profile", updateUserProfile);
 
-module.export = router;
+module.exports = router;
