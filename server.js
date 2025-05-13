@@ -5,7 +5,7 @@ const path = require("path");
 // const { connect } = require("http2");
 const connectDB =require("./config/db.js")
 
-
+const authRoutes=require("./routes/authRoutes")
 const app = express();
 
 // Middelware to handle CORS
@@ -22,10 +22,10 @@ app.use(
 connectDB()
 app.use(express.json());
 
-app.get("/",(req,res)=>{
-    res.status(200)
-res.send("Home")
-})
+// app.get("/",(req,res)=>{
+//     res.status(200)
+// res.send("Home")
+// })
 
 // Routes
 // app.use("/api/auth", authRoutes);
