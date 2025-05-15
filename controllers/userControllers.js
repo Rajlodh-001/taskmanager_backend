@@ -33,7 +33,7 @@ const getUsers = async (req, res) => {
         };
       })
     );
-    res.json(usersWithTaskCounts)
+    res.json(usersWithTaskCounts);
   } catch (error) {
     res.status(500).json({ Message: "Server Error ", error: error.Message });
   }
@@ -44,6 +44,10 @@ const getUsers = async (req, res) => {
 //@access Private
 const getUserById = async (req, res) => {
   try {
+    const user = await User.findById(req.params.id).select("-password");
+    if(!user)return res.status(404).json({message:"User Not Found"});
+    
+    res.json(user);
   } catch (error) {
     res.status(500).json({ Message: "Server Error ", error: error.Message });
   }
@@ -54,6 +58,7 @@ const getUserById = async (req, res) => {
 //@access Private (Admin)
 const deleteUser = async (req, res) => {
   try {
+    const user ="raj";
   } catch (error) {
     res.status(500).json({ Message: "Server Error ", error: error.Message });
   }
