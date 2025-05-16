@@ -11,8 +11,6 @@ const protect = async (req, res, next) => {
       req.user = await User.findById(decode.id).select("-password");
       next();
     } else {
-      
-
       res.status(401).json({ message: "Not Authorized, No Token" });
     }
   } catch (error) {
@@ -24,6 +22,7 @@ const protect = async (req, res, next) => {
 
 const adminOnly = (req, res, next) => {
   if (req.user && req.user.role === "admin") {
+    console.log("reach andmin only")
     next();
   } else {
     res.status(403).json({ message: "Access Denied, Admin only" });

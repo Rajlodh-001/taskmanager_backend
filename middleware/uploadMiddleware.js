@@ -3,10 +3,10 @@ const multer = require("multer");
 // confi Store
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cd(null, "uploads/");
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    cd(null, `${Date.now()}-${file.originalname}`);
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
