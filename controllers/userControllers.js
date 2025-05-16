@@ -7,8 +7,8 @@ const bcrypt = require("bcryptjs");
 //@access private(Admin)
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find({ role: "member" }).select("-password");
-
+    const users = await User.find({ role: 'member' }).select("-password");
+ console.log(users)
     // TaskCount of Each User
     const usersWithTaskCounts = await Promise.all(
       users.map(async (user) => {
@@ -17,11 +17,11 @@ const getUsers = async (req, res) => {
           status: "Pending",
         });
         const inProgressTask = await Task.countDocuments({
-          assignedTo: user_id,
+          assignedTo: user._id,
           status: "In Progress",
         });
         const completedTask = await Task.countDocuments({
-          assignedTo: user_id,
+          assignedTo: user._id,
           status: "Completed",
         });
 
@@ -35,7 +35,7 @@ const getUsers = async (req, res) => {
     );
     res.json(usersWithTaskCounts);
   } catch (error) {
-    res.status(500).json({ Message: "Server Error ", error: error.Message });
+    res.status(500).json({ Message: "Server Error ", error: error.message });
   }
 };
 

@@ -2,6 +2,7 @@ const express =require("express");
 
 const {protect,adminOnly} = require('../middleware/authMiddleware');
 const { route } = require("./authRoutes");
+const{getTasks,getDashboardData,getTaskById,createTask,updateTask,updateTaskStatus,deleteTask,getUserDashboardData,updateTaskChecklist}=require("../controllers/taskControllers")
 
 const router =express.Router();
 
@@ -9,7 +10,7 @@ const router =express.Router();
 router.get("/dashboard-date",protect,getDashboardData);
 router.get("/user-dashboard-data",protect ,getUserDashboardData);
 router.get("/",protect,getTasks)
-router.get("/:id",protect,getTaskById);
+router.get("/:id",protect,getTaskById);                     
 router.post("/",protect,adminOnly ,createTask)
 router.put("/:id",protect ,updateTask)
 router.delete("/:id",protect,adminOnly,deleteTask);
